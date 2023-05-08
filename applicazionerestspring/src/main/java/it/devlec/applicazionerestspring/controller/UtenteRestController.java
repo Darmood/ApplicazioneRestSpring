@@ -26,13 +26,13 @@ public class UtenteRestController {
         logger.info("Prendo tutti gli utenti");
         return repository.findAll();
     }
-    @GetMapping("/marco/{id}")
+    @GetMapping("/utente/{id}")
     public Utente trovaUtenteConID(@PathVariable Long id){
         return repository.findById(id).orElseThrow(
                 () -> new UtenteNonTrovato(id));
     }
     @PostMapping("/utente")
-    public Utente inserisciUnNuovoUtente(@RequestBody Utente nuovoUtente){
+    public Utente inserisciUnNuovoUtente(@RequestBody Utente nuovoUtente) {
         return repository.save(nuovoUtente);
     }
     @PutMapping("/utente")
@@ -56,7 +56,7 @@ public class UtenteRestController {
 
     }
     @DeleteMapping("/utente/{id}")
-    void eliminaUtente(@PathVariable Long id){
+    void eliminaUtente(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
@@ -66,7 +66,7 @@ public class UtenteRestController {
             Date datada,
             @RequestParam(name = "dataa") @DateTimeFormat(pattern = "dd-MM-yyyy")
             Date dataa
-    ){
+    ) {
         return repository.findByDatadinascitaBetween(datada, dataa);
     }
     @GetMapping("/utente/ricercadataregistrazione")
@@ -91,6 +91,7 @@ public class UtenteRestController {
     ) {
         return repository.findByRankingLessThan(max);
     }
+
     // Caricamento di file
     @PostMapping("/caricafile")
     public String caricaFile (@RequestParam("file")MultipartFile file){
@@ -100,5 +101,4 @@ public class UtenteRestController {
         logger.warn(conFormat);
         return conFormat;
     }
-
 }

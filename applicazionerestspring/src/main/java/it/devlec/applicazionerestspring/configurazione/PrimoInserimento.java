@@ -28,11 +28,13 @@ public class PrimoInserimento {
           utenti.add(u3);
           repository.save(u1);
           repository.saveAll(utenti);
+
+
           List<Utente> utentiDalDb = repository.findAll();
           Utente u1DelDB = new Utente();
           int indice = 0;
           for (Utente u: utentiDalDb){
-              if(indice == 0){
+              if(indice == 0) {
                   logger.error("Prendo il primo elemento del DB");
                   u1DelDB = u;
                   indice++;
